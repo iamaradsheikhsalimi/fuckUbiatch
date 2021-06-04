@@ -14,12 +14,12 @@ public class Map {
         return allMaps;
     }
 
-    public static void addMap(Map map){
+    public static void addMap(Map map) {
         allMaps.add(map);
     }
 
-    public Map(int mapID) {
-        this.mapID = mapID;
+    public Map() {
+        this.mapID = allMaps.size();
         this.currentMap = Map.generateMaze();
         allMaps.add(this);
     }
@@ -84,22 +84,16 @@ public class Map {
         return currentMap;
     }
 
-    public void printGeneratedMaze() {
-        for (int i = 0; i < this.currentMap.length; i++) {
-            for (int j = 0; j < this.currentMap[0].length; j++) {
-                System.out.print(this.currentMap[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
     @Override
     public String toString() {
-        return "Map{" +
-                "currentMap=" + Arrays.toString(currentMap) +
-                ", mapID=" + mapID +
-                '}';
+        StringBuilder stringFormat = new StringBuilder();
+        for (int i = 0; i < this.currentMap.length; i++) {
+            for (int j = 0; j < this.currentMap[0].length; j++) {
+                stringFormat.append(this.currentMap[i][j]).append(" ");
+            }
+            stringFormat.append("\n");
+        }
+        stringFormat.append("###").append(this.mapID);
+        return stringFormat.toString();
     }
-
 }

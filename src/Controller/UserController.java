@@ -1,6 +1,9 @@
 package Controller;
 
+import Model.Map;
 import Model.User;
+
+import java.util.ArrayList;
 
 public class UserController {
 
@@ -71,4 +74,16 @@ public class UserController {
     }
 
 
+    public static ArrayList<String> getUserPreferredMaps() {
+        ArrayList<String> maps = new ArrayList<>();
+        for (Map map: loggedInUser.getUserPreferences().getPreferredMaps()){
+            maps.add(map.toString());
+        }
+        return maps;
+    }
+
+    public static void selectMapWithId(String mapId) {
+        Map map = MapController.getMapWithId(mapId);
+        loggedInUser.getUserPreferences().setSelectedMap(map);
+    }
 }

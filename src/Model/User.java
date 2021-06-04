@@ -19,7 +19,8 @@ public class User {
         this.username = username;
         this.password = password;
         this.maxScore = maxScore;
-        this.userPreferences = new UserPreferences(3, new ArrayList<Map>());
+        this.userPreferences = new UserPreferences(DefaultSettings
+                .getPacmanLives(), new ArrayList<Map>(), (Map) DefaultSettings.getDefaultMaps().get(0));
     }
 
     public UserPreferences getUserPreferences() {

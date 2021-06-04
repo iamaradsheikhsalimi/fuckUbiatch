@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class MainMenuHandler {
     private static final Scanner scanner = Application.scanner;
 
-    static void run() {
+    public static void run() {
         String inputCommand;
         try {
             while (true) {
@@ -32,7 +32,7 @@ public class MainMenuHandler {
                             deleteAccount();
                             break;
                         case 4:
-//                            gameSettings();
+                            GameSettingsHandler.run();
                             break;
                         case 5:
 //                             playGame();
