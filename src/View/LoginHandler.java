@@ -1,7 +1,6 @@
 package View;
 
 import Controller.UserController;
-import Controller.Validator;
 
 import java.util.Scanner;
 
@@ -21,6 +20,7 @@ public class LoginHandler {
                     switch (menuNumber) {
                         case 1:
                             loginRun();
+                            MainMenuHandler.run();
                             break;
                         case 2:
                             throw new Exception("back");
@@ -34,16 +34,21 @@ public class LoginHandler {
             }
 
         } catch (Exception e) {
-
+            if (e.getMessage().equals("back")) {
+                Application.run();
+            }
         }
     }
 
 
-    private static void loginRun() {
+    private static void loginRun() throws Exception {
         System.out.println("please enter your username:");
         String username;
         while (true) {
             username = scanner.nextLine();
+            if (username.equals("back")){
+                throw new Exception("back");
+            }
             if (!UserController.isUsernameExists(username)) {
                 System.out.println("there are no users with this username, try again");
                 continue;
@@ -53,6 +58,9 @@ public class LoginHandler {
         System.out.println("please enter your password");
         while (true) {
             String password = scanner.nextLine();
+            if (password.equals("back")){
+                throw new Exception("back");
+            }
             if (!UserController.validateIdentity(username, password)) {
                 System.out.println("invalid password, try again");
                 continue;
@@ -60,6 +68,5 @@ public class LoginHandler {
             UserController.setLoggedInUser(username);
             break;
         }
-        MainMenuHandler.run();
     }
 }

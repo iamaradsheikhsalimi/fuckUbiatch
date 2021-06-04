@@ -1,15 +1,14 @@
 package View;
 
 import Controller.UserController;
-import Controller.Validator;
 import Model.User;
+import jdk.jfr.internal.tool.Main;
 
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class MainMenuHandler {
     private static final Scanner scanner = Application.scanner;
-    private static User username = UserController.getLoggedInUser();
+
     static void run() {
         String inputCommand;
         try {
@@ -39,7 +38,7 @@ public class MainMenuHandler {
                             break;
                         case 5:
 //                             playGame();
-                             break;
+                            break;
                         case 6:
                             logoutUser();
                         default:
@@ -54,35 +53,28 @@ public class MainMenuHandler {
         } catch (Exception e) {
             if (e.getMessage().equals("back to welcome menu")) {
                 Application.run();
+            } else if (e.getMessage().equals("back")) {
+                MainMenuHandler.run();
+            } else if (e.getMessage().equals("delete account")) {
+                Application.run();
             }
+
         }
     }
 
-    private static void deleteAccount() {
-        try{
-            Util.deleteUsername(username);
-        }
-        catch (Exception e){
-            if (e.getMessage().equals("delete account"))
-                Application.run();
-            if (e.getMessage().equals("back")){
-
-            }
-        }
+    private static void deleteAccount() throws Exception {
+        Util.deleteUser();
     }
 
     private static void changePasswordRun() throws Exception {
-        try {
-            while (true) {
-                String password = Util.changePassword(username.getUsername());
-                UserController.editUserPassword(username.getUsername(), password);
-                break;
-            }
-            System.out.println("password changed successfully");
+        while (true) {
+            String password = Util.changePassword();
+            UserController.editUserPassword(password);
+            break;
         }
-        catch (Exception e){
-        }
+        System.out.println("password changed successfully");
     }
+
 
     private static void logoutUser() throws Exception {
         UserController.logoutUser();
@@ -90,3 +82,5 @@ public class MainMenuHandler {
         throw new Exception("back to welcome menu");
     }
 }
+
+

@@ -45,7 +45,8 @@ public class Util {
         return finalPassword;
     }
 
-    public static String changePassword(String username) throws Exception {
+
+    public static String changePassword() throws Exception {
             String currentPassword;
             System.out.println("please enter your current password");
             while (true) {
@@ -53,7 +54,7 @@ public class Util {
                 if (currentPassword.equals("back")) {
                     throw new Exception("back");
                 }
-                if (!UserController.validateIdentity(username, currentPassword)) {
+                if (!UserController.validateLoggedInUserIdentity(currentPassword)) {
                     System.out.println("invalid password, try again");
                     continue;
                 }
@@ -79,7 +80,7 @@ public class Util {
             return newPassword;
         }
 
-    public static void deleteUsername(User username)throws Exception {
+    public static void deleteUser()throws Exception {
         String currentPassword;
         System.out.println("please enter your current password");
         while (true) {
@@ -87,7 +88,7 @@ public class Util {
             if (currentPassword.equals("back")) {
                 throw new Exception("back");
             }
-            if (!UserController.validateIdentity(username.getUsername(), currentPassword)) {
+            if (!UserController.validateLoggedInUserIdentity(currentPassword)) {
                 System.out.println("invalid password, try again");
                 continue;
             }
@@ -115,6 +116,8 @@ public class Util {
                 break;
             System.out.println("invalid command");
         }
-        UserController.deleteAccount(username);
+        UserController.deleteLoggedInUser();
+        System.out.println("user deleted successfully");
+        throw new Exception("delete account");
     }
 }

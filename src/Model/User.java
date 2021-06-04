@@ -3,11 +3,12 @@ package Model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.AnnotatedArrayType;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class User {
-    private ArrayList<Map> userFavoriteMap;
+    private UserPreferences userPreferences;
     public static ArrayList<User> allUsers = new ArrayList<>();
     private String username;
     private String password;
@@ -18,15 +19,15 @@ public class User {
         this.username = username;
         this.password = password;
         this.maxScore = maxScore;
-        this.userFavoriteMap = new ArrayList<>();
+        this.userPreferences = new UserPreferences(3, new ArrayList<Map>());
     }
 
-    public ArrayList<Map> getUserFavoriteMap() {
-        return userFavoriteMap;
+    public UserPreferences getUserPreferences() {
+        return userPreferences;
     }
 
-    public void setUserFavoriteMap(Map map) {
-        this.userFavoriteMap.add(map);
+    public void setUserPreferences(UserPreferences userPreferences) {
+        this.userPreferences = userPreferences;
     }
 
     public static ArrayList<User> getAllUsers() {

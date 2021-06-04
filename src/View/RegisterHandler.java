@@ -16,7 +16,9 @@ public class RegisterHandler {
             UserController.saveUser(username, password, "");
         }
         catch (Exception e) {
-
+            if (e.getMessage().equals("back")){
+                Application.run();
+            }
         }
     }
 }

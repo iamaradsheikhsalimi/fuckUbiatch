@@ -1,7 +1,5 @@
 package View;
 
-import Controller.Validator;
-import Model.User;
 import java.util.Scanner;
 
 public class Application {
@@ -9,7 +7,6 @@ public class Application {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        User.loadUsers();
         System.out.println("welcome");
         Application.run();
     }
@@ -18,7 +15,6 @@ public class Application {
         String inputCommand;
         try {
             while (true) {
-
                 System.out.println("*** type back or follow instructions whenever you want to go to last menu ***");
                 System.out.println("please enter one of this commands");
                 System.out.println("1 for register");

@@ -1,5 +1,4 @@
 package View;
-import Controller.Validator;
 import java.util.Scanner;
 
 public class GuestMainMenuHandler {
