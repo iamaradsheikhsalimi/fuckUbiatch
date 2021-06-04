@@ -5,17 +5,23 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class Map {
-    public static void main(String[] args) {
-        Map m = new Map(3);
-        m.printGeneratedMaze();
-    }
 
+    private static ArrayList<Map> allMaps = new ArrayList<>();
     private String[][] currentMap;
     private int mapID;
+
+    public static ArrayList<Map> getAllMaps() {
+        return allMaps;
+    }
+
+    public static void addMap(Map map){
+        allMaps.add(map);
+    }
 
     public Map(int mapID) {
         this.mapID = mapID;
         this.currentMap = Map.generateMaze();
+        allMaps.add(this);
     }
 
     public int getMapID() {
@@ -76,7 +82,6 @@ public class Map {
         }
         startDfsMethod(1, 1, currentMap, checkedCells);
         return currentMap;
-
     }
 
     public void printGeneratedMaze() {
@@ -88,4 +93,13 @@ public class Map {
         }
         System.out.println();
     }
+
+    @Override
+    public String toString() {
+        return "Map{" +
+                "currentMap=" + Arrays.toString(currentMap) +
+                ", mapID=" + mapID +
+                '}';
+    }
+
 }

@@ -1,13 +1,25 @@
 package Model;
-
+import Controller.MapController;
 import java.util.ArrayList;
 
 public class DefaultSettings {
-    public static int getPackmanLives() {
-        return 3;
-    }
-    public static ArrayList<Map> getMaps() {
-        return new ArrayList<Map>();
+
+    static ArrayList <Map> defaultMaps = new ArrayList<>();
+    Map map1 = MapController.createMap();
+    Map map2 = MapController.createMap();
+    Map map3 = MapController.createMap();
+
+    DefaultSettings.
+
+    public static void addMap(Map map){
+        defaultMaps.add(map);
     }
 
+    public ArrayList<Map> getDefaultMaps() {
+        return defaultMaps;
+    }
+
+    public static int getPacmanLives() {
+        return 3;
+    }
 }

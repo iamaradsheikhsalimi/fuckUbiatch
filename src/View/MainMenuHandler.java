@@ -1,8 +1,6 @@
 package View;
 
 import Controller.UserController;
-import Model.User;
-import jdk.jfr.internal.tool.Main;
 
 import java.util.Scanner;
 
