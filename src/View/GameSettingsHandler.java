@@ -1,13 +1,15 @@
 package View;
 
 import java.util.Scanner;
+
+import Controller.UserController;
 import View.MapSettings.*;
 
 public class GameSettingsHandler {
 
     private static final Scanner scanner = Application.scanner;
 
-    static void run() {
+    public static void run() {
         String inputCommand;
         try {
             while (true) {
@@ -23,7 +25,7 @@ public class GameSettingsHandler {
                             ChooseMapHandler.run();
                             break;
                         case 2:
-                            throw new Exception("back");
+                            GameSettingsHandler.choosePacmanLife();
                         case 3:
                             throw new Exception("back");
                         default:
@@ -37,12 +39,34 @@ public class GameSettingsHandler {
 
         } catch (Exception e) {
             if (e.getMessage().equals("back")) {
-                Application.run();
+                MainMenuHandler.run();
+            }
+            else if (e.getMessage().equals("back to game settings")){
+                GameSettingsHandler.run();
             }
         }
     }
 
-
-
-
+    private static void choosePacmanLife() throws Exception {
+        System.out.println("witch life would you prefer for pacman(default life is 3)");
+        System.out.println("2   3   4   5");
+        String input;
+        while (true){
+            input = scanner.nextLine();
+            if (input.equals("back"))
+                throw new Exception("back to game settings");
+            else if (Validator.stringIsNumber(input)){
+                if (Integer.parseInt(input) >= 2 && Integer.parseInt(input) <= 5){
+                    UserController.setPacmanLife(input);
+                    System.out.println("pacman life changed successfully");
+                    break;
+                }
+                else
+                    System.out.println("pacman life should be between 2 and 5 try again");
+            }
+            else {
+                System.out.println("invalid command try again");
+            }
+        }
+    }
 }

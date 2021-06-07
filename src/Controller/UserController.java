@@ -86,4 +86,8 @@ public class UserController {
         Map map = MapController.getMapWithId(mapId);
         loggedInUser.getUserPreferences().setSelectedMap(map);
     }
+
+    public static void setPacmanLife(String input) {
+        loggedInUser.getUserPreferences().setPackmanLives(Integer.parseInt(input));
+    }
 }

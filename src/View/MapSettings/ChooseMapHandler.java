@@ -2,16 +2,11 @@ package View.MapSettings;
 
 import Controller.MapController;
 import Controller.UserController;
-import View.MapSettings.*;
 import View.Application;
 import View.Validator;
-import sun.awt.X11.XInputMethod;
-
-import javax.swing.*;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import View.GameSettingsHandler;
 
 public class ChooseMapHandler {
     private static final Scanner scanner = Application.scanner;
@@ -39,7 +34,7 @@ public class ChooseMapHandler {
                             seeAndChoosePreferredMap();
                             break;
                         case 4:
-                            throw new Exception("back");
+                            throw new Exception("back to game settings");
                         default:
                             System.out.println("number should be between 1 and 2");
 
@@ -53,6 +48,8 @@ public class ChooseMapHandler {
             if (e.getMessage().equals("back")) {
                 ChooseMapHandler.run();
             }
+            else if (e.getMessage().equals("back to game settings"));
+                GameSettingsHandler.run();
         }
     }
 
@@ -63,7 +60,6 @@ public class ChooseMapHandler {
             String[] splitData = mapData.split("###");
             System.out.println();
             System.out.println(splitData[0]);
-            System.out.println();
             System.out.println("map Id: " + splitData[1]);
             mapIds.add(splitData[1]);
         }
@@ -78,19 +74,17 @@ public class ChooseMapHandler {
             } else if (input.equals("back")) {
                 throw new Exception("back");
             } else {
-
-                System.out.println("wrong map Id");
-                System.out.println("try again");
+                System.out.println("wrong map Id try again\n");
             }
         }
     }
 
     private static void chooseRandomMap() throws Exception {
+        String[] splitData = MapController.getRandomMap().split("###");
+        System.out.println(splitData[0]);
+        System.out.println("map ID: " + splitData[1]);
+        System.out.println("if you want to add this map to you preferred maps type \"confirm\" of \"choose again\" for see another random map");
         while (true) {
-            String[] splitData = MapController.getRandomMap().split("###");
-            System.out.println(splitData[0]);
-            System.out.println();
-            System.out.println("if you want to add this map to you preferred maps type \"confirm\" of \"choose again\" for see another random map");
             String input = scanner.nextLine();
             if (input.equals("back")) {
                 throw new Exception("back");
@@ -98,17 +92,18 @@ public class ChooseMapHandler {
                 MapController.addToUserPreferredMap(splitData[1]);
                 System.out.println("map added successfully");
                 break;
-            } else if (input.equals("choose another")) {
+            } else if (input.equals("choose again")) {
                 System.out.println("here you are");
-            } else {
+                ChooseMapHandler.chooseRandomMap();
                 break;
+            } else {
+                System.out.println("invalid command try again");
             }
         }
-
-
     }
 
     private static void chooseDefaultMap() {
+
         DefaultMapHandler.run();
     }
 }
